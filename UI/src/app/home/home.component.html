@@ -5,8 +5,8 @@
             <div class="mb-5">
                 <p-button label="Add Employee" class="p-button-raised" [loading]="false"></p-button>
             </div>
-            <p-table [value]="employees" [paginator]="true" [rows]="2" [showCurrentPageReport]="true" responsiveLayout="scroll" styleClass="p-datatable-sm p-datatable-gridlines"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[1,2,3,4,5]" [resizableColumns]="true"
+            <p-table [value]="employees" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" styleClass="p-datatable-sm p-datatable-gridlines"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,20,50]" [resizableColumns]="true"
             >
                 <ng-template pTemplate="header">
                     <tr>
