@@ -38,14 +38,6 @@ public class Grades {
         this.position = position;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

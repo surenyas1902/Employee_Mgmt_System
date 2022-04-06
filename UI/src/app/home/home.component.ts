@@ -1,60 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee';
+import { Gender } from '../models/gender';
+import { EmployeeService } from '../services/employee.service';
+import {MessageService} from 'primeng/api';
+import { Observer } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [MessageService]
 })
 export class HomeComponent implements OnInit {
 
   employees: Employee[] = [];
+  genders: Gender = {
+    'M': 'Male',
+    'F': 'Female'
+  };
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.employees.push({
-      firstName: "Surendiran",
-      lastName: "S",
-      dob: new Date("1993-04-12"),
-      doj: new Date("2022-01-31"),
-      id: "123",
-      gender: "M",
-      grade: {
-        id: "G1",
-        position: "Position Name"
-      },
-      resume: "",
-      supervisor: "Yaswanth K"
-    },
-    {
-      firstName: "Surendiran",
-      lastName: "S",
-      dob: new Date("1993-04-12"),
-      doj: new Date("2022-01-31"),
-      id: "123",
-      gender: "M",
-      grade: {
-        id: "G1",
-        position: "Position Name"
-      },
-      resume: "",
-      supervisor: "Somnath K"
-    },
-    {
-      firstName: "Surendiran",
-      lastName: "S",
-      dob: new Date("1993-04-12"),
-      doj: new Date("2022-01-31"),
-      id: "123",
-      gender: "M",
-      grade: {
-        id: "G1",
-        position: "Position Name"
-      },
-      resume: "",
-      supervisor: "Prema S"
-    })
+    const dataObserver: Observer<Employee[]> = {
+      next:(data=> { this.employees = data}),
+      error: (error => { this.messageService.add({severity:'error', summary: 'Error', detail: error.message}); }),
+      complete: (() => {})
+    }
+    this.employeeService.getEmployees().subscribe(dataObserver);
   }
 
 }
